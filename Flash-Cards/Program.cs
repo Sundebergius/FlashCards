@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using flashCards;
+using flashcards;
 using Microsoft.Data.SqlClient;
 
 namespace Flashcards
