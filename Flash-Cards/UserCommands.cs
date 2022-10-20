@@ -110,7 +110,139 @@ namespace flashcards
             bool closeArea = false;
             while (closeArea == false)
             {
-                
+                Console.WriteLine("\nWhat would you like to do?");
+                Console.WriteLine("\nType 0 to close application.");
+                Console.WriteLine("Type 1 to return to Main Menu");
+                Console.WriteLine("Type 2 to change stack's name");
+                Console.WriteLine("Type 3 to delete stack.");
+                Console.WriteLine("Type 4 to add a flashcard.");
+                Console.WriteLine("Type 5 to delete a flashcard.");
+                Console.WriteLine("Type 6 to update a flashcard.");
+
+                string commandInput = Console.ReadLine();
+
+                while (string.IsNullOrEmpty(commandInput) || !int.TryParse(commandInput, out _))
+                {
+                    Console.WriteLine("\nInvalid Command. Please type a number from 0 to 4.\n");
+                }
+
+                int command = Convert.ToInt32(commandInput);
+
+                switch (command)
+                {
+                    case 0:
+                        closeArea = true;
+                        break;
+                    case 1:
+                        MainMenu();
+                        break;
+                    case 2:
+                        StacksController.UpdateStackName(stackId);
+                        break;
+                    case 3:
+                        StacksController.CreateFlashcard(stackId, null);
+                        StacksController.GetStackWithCards(stackId);
+                        break;
+                    case 4:
+                        FlashcardsController.CreateFlashcard(stackId, null);
+                        StacksController.GetStackWithCards(stackId);
+                        break;
+                    case 5: 
+                        FlashcardsController.DeleteFlashcard(stack);
+                        StackController.GetStackWithCards(stackId);
+                        break;
+                    case 6:
+                        FlashcardsController.UpdateFlashcard(stack);
+                        StacksController.GetStackWithCards(stackId);
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid Command. Please type a number from 0 to 6.\n");
+                        break;
+                }
+            }
+        }
+
+        internal static string GetStringInput(string message)
+        {
+            Console.WriteLine(message);
+            string name = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("\nInvalid name");
+                name = Console.ReadLine();
+            }
+
+            return name;
+        }
+        internal static string GetBinaryInput(string message)
+        {
+            Console.WriteLine(message);
+            string option = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(option) && !option.Equals("Y") && !option.Equals("N"))
+            {
+                Console.WriteLine("\nInvalid option");
+                option = Console.ReadLine();
+            }
+
+            return option;
+        }
+        internal static int GetIntergerInput(string message)
+        {
+            Console.WriteLine(message)
+            string idInput = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(idInput) || !int.TryParse(idInput, out _))
+            {
+                Console.WriteLine("\nInvalid Command. Please type a numeric value.");
+                idInput = Console.ReadLine();
+            }
+
+            return Int32.Parse(idInput);
+        }
+        internal static void StudyMenu()
+        {
+            Console.WriteLine("\n\nStudy Area\n");
+            StacksController.GetStacks();
+
+            bool closeArea = false;
+            while (closeArea == false)
+            {
+                Console.WriteLine("\nWhat would you like to do?");
+                Console.WriteLine("\nType 0 to Close Application.");
+                Console.WriteLine("Type 1 to return to Main Menu.");
+                Console.WriteLine("Type 2 to study.");
+                Console.WriteLine("Type 3 to see your study sessions.");
+
+                string commandInput = Console.ReadLine();
+
+                while (string.IsNullOrEmpty(commandInput) || !int.TryParse(commandInput, out _))
+                {
+                    Console.WriteLine("\nInvalid Command. Please type a number from 0 to 3.\n");
+                    commandInput = Console.ReadLine();
+                }
+
+                int command = Convert.ToInt32(commandInput);
+
+                switch (command)
+                {
+                    case 0:
+                        closeArea = true;
+                        break;
+                    case 1:
+                        MainMenu();
+                        break;
+                    case 2:
+                        StudyController.NewStudySession();
+                        break;
+                    case 3:
+                        StudyController.GetStudySessions();
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid Command. Please type a number from 0 to 3.\n");
+                        break;
+                }
             }
         }
     }
