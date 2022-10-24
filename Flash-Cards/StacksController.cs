@@ -136,17 +136,51 @@ namespace flashcards
 
         internal static void DeleteStack(int stackId)
         {
+            SqlConnection conn = new(connectionString);
 
+            using (conn)
+            {
+                conn.Open();
+                var tableCmd = conn.CreateCommand();
+                tableCmd.CommandText =
+                    $"DELETE FROM stack WHERE Id = ('{stackId}')";
+                tableCmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            Console.WriteLine("\n\nYour flashcards stack was successfully deleted.\n\n");
+            UserCommands.StacksMenu();
         }
 
         internal static void UpdateStackName(int stackId)
         {
+            string name = UserCommands.GetStringInput("Please type new stack name:");
+            SqlConnection conn = new(connectionString);
 
+            using (conn)
+            {
+                conn.Open();
+                var tableCmd = conn.CreateCommand();
+                tableCmd.CommandText =
+                    @$"UPDATE stack
+                        SET name = ('{name}')
+                        WHERE Id = {stackId}";
+                    tableCmd.ExecuteNonQuery();
+                    conn.Close();
+            }
+
+            Console.WriteLine("\n\nYour flashcards stack was successfully updated.\n\n");
+            UserCommands.StacksMenu();
         }
 
         private static int GetStackId()
         {
-            
+            SqlConnection conn = new(connectionString);
+
+            conn.Open();
+            SqlCommand command = new("SELECT IDENT_CURRENT('stack'), conn");
+            int id = Convert.ToInt32(command.ExecuteScalar());
+            conn.Close();
+            return id;
         }
     }
 }
