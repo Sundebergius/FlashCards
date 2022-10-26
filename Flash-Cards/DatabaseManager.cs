@@ -31,7 +31,7 @@ namespace flashcards
 
                 CreateTables();
             }
-            catch (exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
