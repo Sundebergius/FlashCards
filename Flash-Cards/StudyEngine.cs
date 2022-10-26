@@ -20,7 +20,7 @@ namespace flashcards
             id = UserCommands.GetIntergerInput("Which stack would you like to study?");
         }
 
-        List<FlashcardsWithStack> = StacksController.GetStackWithCards(id);
+        List<FlashcardsWithStack> stack = StacksController.GetStackWithCards(id);
 
         var inputAnswer = "";
         var score = 0;
@@ -28,16 +28,16 @@ namespace flashcards
 
     List<int> incorrectAnswers = new List<int>();
 
-    stack.forEach(x =>
+    stack.ForEach(x =>
     {
         questionId++;
-        Console.WriteLine(TimeZone.Question);
+        Console.WriteLine(x.Question);
         inputAnswer = UserCommands.GetStringInput("Type your answer:");
 
-        if (inputAnswer == x.answer)
+        if (inputAnswer == x.Answer)
             score++;
         else
-            incorrectAnswers.add(questionId);
+            incorrectAnswers.Add(questionId);
     });
 
     Console.WriteLine($"Score: {score}");

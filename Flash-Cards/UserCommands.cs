@@ -140,8 +140,8 @@ namespace flashcards
                         StacksController.UpdateStackName(stackId);
                         break;
                     case 3:
-                        StacksController.CreateFlashcard(stackId, null);
-                        StacksController.GetStackWithCards(stackId);
+                        StacksController.DeleteStack(stackId);
+                        StacksController.GetStacks();
                         break;
                     case 4:
                         FlashcardsController.CreateFlashcard(stackId, null);
@@ -149,7 +149,7 @@ namespace flashcards
                         break;
                     case 5: 
                         FlashcardsController.DeleteFlashcard(stack);
-                        StackController.GetStackWithCards(stackId);
+                        StacksController.GetStackWithCards(stackId);
                         break;
                     case 6:
                         FlashcardsController.UpdateFlashcard(stack);
@@ -190,7 +190,7 @@ namespace flashcards
         }
         internal static int GetIntergerInput(string message)
         {
-            Console.WriteLine(message)
+            Console.WriteLine(message);
             string idInput = Console.ReadLine();
 
             while (string.IsNullOrEmpty(idInput) || !int.TryParse(idInput, out _))

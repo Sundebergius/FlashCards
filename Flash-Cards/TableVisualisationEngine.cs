@@ -12,15 +12,15 @@ namespace flashcards
     {
         public static void PrepareFlashcardsList(int id, List<FlashcardsWithStack> list)
         {
-            string stackName = List.FirstOrDefault()?.stackName;
+            string stackName = list.FirstOrDefault()?.StackName;
         string tableName = $"{id} - {stackName}";
 
         List<FlashcardsWithStackToView> stackToView = new List<FlashcardsWithStackToView>();
 
         int cardIndex = 1;
-        List.foreach (x =>
+        list.ForEach (x =>
         {
-            stackToView.add(new FlashcardsWithStackToView
+            stackToView.Add(new FlashcardsWithStackToView
                 {
                     Id = cardIndex,
                     Question = x.Question,
